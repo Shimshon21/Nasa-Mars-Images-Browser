@@ -74,10 +74,12 @@
     To clear input warning press 'clear' button.
     <br/>
     <br/>
-    User for example: email:example@gmail.com , password 12345678
+    User for example: email:
+    example@gmail.com , password 12345678
 </div>
 <p>
-Open console, execute : node bin/www
+Open console, execute : 
+    node bin/www
 </p>
 <p>
 Then open your browser at http://localhost:3000

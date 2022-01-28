@@ -85,3 +85,8 @@ Then open your browser at http://localhost:3000
 
 
 <p>Exmaples:</p>
+<p>Login</p>
+<img src="https://github.com/Shimshon21/Nasa-Mars-Images-Browser/blob/main/examples/example2.png">
+
+<p>Images Browser</p>
+<img src="https://github.com/Shimshon21/Nasa-Mars-Images-Browser/blob/main/examples/example1.png">

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="js/userMarsImagesList.js"></script>
+    <title>Mars-Images-List</title>
+</head>
+<body style="background-repeat:no-repeat;background-size: auto; background-image: url('/images/mars_background.jpg')">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><%= firstName %></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#mInfoModal" href="#">Who Am I</a>
+                </li>
+                <li class="nav-item">
+                    <a id="userLogout" class="nav-link" href="marsImages/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container pt-1 mb-3">
+    <div class="row bg-image justify-content-center">
+        <div class="text-center" style="color: white">
+            <h1>Mars Image Browser</h1>
+            <p>Brows NASA Mars images and save your preferred ones</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="container" style="background: white; padding: 0">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="p-3 mb-2 bg-dark text-white">Search For Images</h2>
+            <form id="searchForm"  class="needs-validation" method="get" novalidate>
+                <div class="form-group mt-3">
+                    <label for="dateInput" style="font-weight: bold">Date(YYYY-MM-DD) or Sol:</label>
+                    <input id="dateInput" type="text" class="form-control" required>
+                    <div class="invalid-feedback">
+                        'input required here'
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="missionSelection" style="font-weight: bold">Select Mission:</label>
+                    <select  class="form-select" id="missionSelection" required>
+                        <option selected disabled value="">Choose A Rover</option>
+                        <option>Curiosity</option>
+                        <option>Opportunity</option>
+                        <option>Spirit</option>
+                    </select>
+                    <div  class="invalid-feedback">
+                        'input required here'
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="cameraSelection"  style="font-weight: bold">Select Camera:</label>
+                    <select class="form-select" id="cameraSelection" required>
+                        <option selected disabled value="">Choose A Camera</option>
+                        <option>RHAZ</option>
+                        <option>FHAZ</option>
+                        <option>MAST</option>
+                        <option>CHEMCAM</option>
+                        <option>MAHLI</option>
+                        <option>MARDI</option>
+                        <option>NAVCAM</option>
+                        <option>PANCAM</option>
+                        <option>MINITES</option>
+                    </select>
+                    <div  class="invalid-feedback">
+                        'input required here'
+                    </div>
+                </div>
+
+                <div class="col">
+                    <button id="searchImagesBtn" type="submit" class="btn btn-outline-info">
+                        Search
+                    </button>
+                    <button id="clearBtn" type="button" class="btn btn-outline-info">
+                        Clear
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-6">
+            <h2 class="p-3 mb-2 bg-secondary text-white">Saved Images</h2>
+            <div class="col">
+                <button id="editList" type="button" class="btn btn-outline-primary">
+                    Edit List
+                </button>
+                <button id="showSlide"  type="button" class="btn btn-outline-info">
+                    Start Slide
+                </button>
+                <button id="stopSlide"  type="button" class="btn btn-outline-info">
+                    Stop Slide
+                </button>
+                <div class="overflow-auto mt-3" style="height: 200px">
+                    <ol id="saveImageList" class="list-group list-group-numbered">
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div id="carouselMarImages"  class="carousel-inner">
+
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 mt-3">
+            <h2 class="p-3 bg-dark text-white" style="margin-bottom: 0">Search Result</h2>
+        </div>
+        <div class="row" id="nasaImagesList">
+        </div>
+
+        <div class="d-flex justify-content-center" >
+            <div id="loadingSpinner"  class="spinner-border text-dark"  role="status"
+                 style="display: none;position: fixed; width: 5rem; height: 5rem;">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="mInfoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header  bg-dark">
+                <h5 class="modal-title" id="mDataModal" style="color: white">Who Am I</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3 id="modalName"><%=firstName%> <%=lastName%></h3>
+                <p id="modalEmail">-Email: <%=email%></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="mWarnModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header  bg-info">
+                <h5 class="modal-title">Warning</h5>
+            </div>
+            <div class="modal-body">
+                <p id="modal-warning"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>

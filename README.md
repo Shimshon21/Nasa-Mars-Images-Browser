@@ -74,8 +74,10 @@
     To clear input warning press 'clear' button.
     <br/>
     <br/>
-    User for example: email:
-    example@gmail.com , password 12345678
+    User for example: <br/>
+    email: <br/>
+    example@gmail.com <br/>
+    password 12345678
 </div>
 <p>
 Open console, execute : 
@@ -86,7 +88,7 @@ Then open your browser at http://localhost:3000
 </p>
 
 
-<p>Exmaples:</p>
+<h1>Exmaples:</h1>
 <p>Login</p>
 <img src="https://github.com/Shimshon21/Nasa-Mars-Images-Browser/blob/main/examples/example2.png">
 
